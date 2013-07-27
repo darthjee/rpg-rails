@@ -1,10 +1,10 @@
 class Book
   include MongoMapper::Document
 
-  many :translations
+  many :book_translations
 end
 
-class Translation
+class BookTranslation
   include MongoMapper::EmbeddedDocument
   key :title, String
   key :short, String
