@@ -24,12 +24,9 @@ class BooksController < ApplicationController
   # GET /books/new
   # GET /books/new.json
   def new
-    @book = Book.new
+    @translation = BookTranslation.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @book }
-    end
+    render "new"
   end
 
   # GET /books/1/edit
@@ -40,7 +37,9 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
-    @book = Book.new(params[:book])
+    @translation = BookTranslation.new(params[:book_translation])
+    @book = Book.new
+    @book.book_translations.push @translation
 
     respond_to do |format|
       if @book.save
