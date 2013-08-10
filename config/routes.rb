@@ -1,5 +1,9 @@
 RpgRails::Application.routes.draw do
-  resources :books
+  resources :books, :except => :edit do
+    member do
+      get "/translation/:translation_id/edit", :action => "books", :as => "edit_book_translation"
+    end
+  end
 
 
   # The priority is based upon order of creation:

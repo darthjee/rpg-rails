@@ -2,15 +2,17 @@
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Languages</th>
+    <th>Title</th>
+    <th>Short</th>
   </tr>
 
 <% @books.each do |book| %>
   <tr>
+    <td><%= book.book_translations.map{|t| t.language}.join(',') %></td>
+    <td><%= book.book_translations.first.title %></td>
+    <td><%= book.book_translations.map{|t| t.short}.join(',') %></td>
     <td><%= link_to 'Show', book %></td>
-    <td><%= link_to 'Edit', edit_book_path(book) %></td>
     <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>

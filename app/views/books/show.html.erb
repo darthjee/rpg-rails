@@ -1,5 +1,21 @@
 <p id="notice"><%= notice %></p>
 
+<table>
+    <tr>
+        <th>Lang</th>
+        <th>Title</th>
+        <th>Short</th>
+    </tr>
 
-<%= link_to 'Edit', edit_book_path(@book) %> |
+    <% @book.book_translations.each do |t| %>
+        <tr>
+            <td><%= t.language %></td>
+            <td><%= t.title %></td>
+            <td><%= t.short %></td>
+            <td><%= link_to 'Edit', edit_book_translation_path(@book, t) %></td>
+        </tr>
+    <% end %>
+</table>
+
+
 <%= link_to 'Back', books_path %>
