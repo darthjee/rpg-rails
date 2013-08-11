@@ -32,6 +32,7 @@ class BooksController < ApplicationController
   # GET /books/1/edit
   def edit
     @book = Book.find(params[:id])
+    @translation = @book.find_translation(params[:lang])
   end
 
   # POST /books

@@ -12,7 +12,7 @@
             <td><%= t.language %></td>
             <td><%= t.title %></td>
             <td><%= t.short %></td>
-            <td><%= link_to 'Edit', edit_book_translation_path(@book, t) %></td>
+            <td><%= link_to 'Edit', edit_translation_book_path(@book, t.language) %></td>
         </tr>
     <% end %>
 </table>
