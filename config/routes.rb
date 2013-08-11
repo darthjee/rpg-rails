@@ -2,6 +2,9 @@ RpgRails::Application.routes.draw do
   resources :books, :except => :edit do
     member do
       get "/translation/:lang/edit", :action => "edit", :as => "edit_translation"
+      post "/", :action => "create", :as => "create_translation"
+    end
+    collection do
     end
   end
 

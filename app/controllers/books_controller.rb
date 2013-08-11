@@ -39,7 +39,7 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @translation = BookTranslation.new(params[:book_translation])
-    @book = Book.new
+    @book = params.has_key?(:id) ? Book.find(:id) : Book.new
     @book.book_translations.push @translation
 
     respond_to do |format|
