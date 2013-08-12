@@ -38,6 +38,7 @@ class BooksController < ApplicationController
   # POST /books
   # POST /books.json
   def create
+    @translation = BookTranslation.new(params[:book_translation])
     @book.book_translations.push @translation
 
     respond_to do |format|
