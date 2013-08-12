@@ -1,7 +1,8 @@
 class BooksController < ApplicationController
-  
-  before_filter :form_url
-  
+
+  before_filter :find_object, :only => [:show, :edit, :create, :update, :destroy]
+  before_filter :form_url, :only => [:edit, :new]
+
   # GET /books
   # GET /books.json
   def index
@@ -16,8 +17,6 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    @book = Book.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @book }
@@ -34,15 +33,11 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
-    @book = Book.find(params[:id])
-    @translation = @book.find_translation(params[:lang])
   end
 
   # POST /books
   # POST /books.json
   def create
-    @translation = BookTranslation.new(params[:book_translation])
-    @book = params.has_key?(:id) ? Book.find(:id) : Book.new
     @book.book_translations.push @translation
 
     respond_to do |format|
@@ -60,14 +55,16 @@ class BooksController < ApplicationController
   # PUT /books/1.json
   def update
     @book = Book.find(params[:id])
+    @translation = @book.find_translation(params[:lang])
+
 
     respond_to do |format|
-      if @book.update_attributes(params[:book])
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+      if @translation.update_attributes(params[:book_translation])
+        format.html { redirect_to @book, notice: 'Translation was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
+        format.json { render json: @translation.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -83,9 +80,14 @@ class BooksController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   private
-  
+
+  def find_object
+    @book = params.has_key?(:id) ? Book.find(params[:id]) : Book.new
+    @translation = @book.find_translation(params[:lang]) if params.has_key? :lang
+  end
+
   def form_url
     @url = if not params.has_key?(:id)
       books_path
@@ -95,5 +97,5 @@ class BooksController < ApplicationController
       update_translation_book_path(params[:id],params[:lang])
     end
   end
-  
+
 end
