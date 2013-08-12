@@ -1,4 +1,7 @@
 class BooksController < ApplicationController
+  
+  before_filter :form_url
+  
   # GET /books
   # GET /books.json
   def index
@@ -79,5 +82,11 @@ class BooksController < ApplicationController
       format.html { redirect_to books_url }
       format.json { head :no_content }
     end
+  end
+  
+  private
+  
+  def form_url
+    @url = books_path
   end
 end
