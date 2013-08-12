@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 
-  before_filter :find_object, :only => [:show, :edit, :create, :update, :destroy]
+  before_filter :find_object, :except => [:index]
   before_filter :form_url, :only => [:edit, :new]
 
   # GET /books
@@ -54,10 +54,6 @@ class BooksController < ApplicationController
   # PUT /books/1
   # PUT /books/1.json
   def update
-    @book = Book.find(params[:id])
-    @translation = @book.find_translation(params[:lang])
-
-
     respond_to do |format|
       if @translation.update_attributes(params[:book_translation])
         format.html { redirect_to @book, notice: 'Translation was successfully updated.' }
@@ -72,7 +68,15 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
-    @book = Book.find(params[:id])
+    @translation.destroy
+
+    respond_to do |format|
+      format.html { redirect_to books_url }
+      format.json { head :no_content }
+    end
+  end
+
+  def destroy_translation
     @book.destroy
 
     respond_to do |format|

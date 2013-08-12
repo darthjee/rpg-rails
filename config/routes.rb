@@ -4,6 +4,7 @@ RpgRails::Application.routes.draw do
       get "/:lang/edit", :action => "edit", :as => "edit_translation"
       post "/", :action => "create", :as => "create_translation"
       put "/:lang", :action => "update", :as => "update_translation"
+      get "/new", :action => "new", :as => "new_translation"
     end
     collection do
     end
