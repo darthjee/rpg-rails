@@ -78,10 +78,11 @@ class BooksController < ApplicationController
   end
 
   def destroy_translation
-    @book.destroy
+    @book.book_translations.delete(@translation)
+    @book.save
 
     respond_to do |format|
-      format.html { redirect_to books_url }
+      format.html { redirect_to book_url(@book) }
       format.json { head :no_content }
     end
   end

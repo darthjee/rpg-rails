@@ -13,6 +13,7 @@
             <td><%= t.title %></td>
             <td><%= t.short %></td>
             <td><%= link_to 'Edit', edit_translation_book_path(@book, t.language) %></td>
+            <td><%= link_to 'Destroy', destroy_translation_book_path(@book.id, t.language), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
     <% end %>
 </table>
