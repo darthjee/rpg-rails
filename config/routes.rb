@@ -1,8 +1,9 @@
 RpgRails::Application.routes.draw do
-  resources :books, :except => :edit do
+  resources :books, :except => [:edit, :update] do
     member do
-      get "/translation/:lang/edit", :action => "edit", :as => "edit_translation"
+      get "/:lang/edit", :action => "edit", :as => "edit_translation"
       post "/", :action => "create", :as => "create_translation"
+      post "/:lang", :action => "update", :as => "update_translation"
     end
     collection do
     end
