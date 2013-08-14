@@ -105,7 +105,7 @@ class BooksController < ApplicationController
   end
 
   def form_url
-    @url = if not params.has_key?(:id)
+    @form_path = if not params.has_key?(:id)
       books_path
     elsif not (params.has_key?(:lang))
       book_path(params[:id])
