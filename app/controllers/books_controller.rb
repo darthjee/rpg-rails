@@ -69,7 +69,7 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
-    @translation.destroy
+    @book.destroy
 
     respond_to do |format|
       format.html { redirect_to books_url }
@@ -79,11 +79,21 @@ class BooksController < ApplicationController
 
   def destroy_translation
     @book.book_translations.delete(@translation)
-    @book.save
 
-    respond_to do |format|
-      format.html { redirect_to book_url(@book) }
-      format.json { head :no_content }
+    if @book.book_translations.size > 0
+      @book.save
+
+      respond_to do |format|
+        format.html { redirect_to book_url(@book) }
+        format.json { head :no_content }
+      end
+    else
+      @book.destroy
+
+      respond_to do |format|
+        format.html { redirect_to books_url }
+        format.json { head :no_content }
+      end
     end
   end
 
