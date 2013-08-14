@@ -1,4 +1,4 @@
-<%= form_for(@translation,{:url => @form_path}) do |f| %>
+<%= form_for(@translation,{:url => form_path}) do |f| %>
   <% if @translation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@translation.errors.count, "error") %> prohibited this book from being saved:</h2>

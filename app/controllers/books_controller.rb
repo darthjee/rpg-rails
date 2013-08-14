@@ -1,7 +1,6 @@
 class BooksController < ApplicationController
 
   before_filter :find_object, :except => [:index]
-  before_filter :form_url, :only => [:edit, :new]
 
   # GET /books
   # GET /books.json
@@ -102,16 +101,6 @@ class BooksController < ApplicationController
   def find_object
     @book = params.has_key?(:id) ? Book.find(params[:id]) : Book.new
     @translation = @book.find_translation(params[:lang]) if params.has_key? :lang
-  end
-
-  def form_url
-    @form_path = if not params.has_key?(:id)
-      books_path
-    elsif not (params.has_key?(:lang))
-      book_path(params[:id])
-    else
-      update_translation_book_path(params[:id],params[:lang])
-    end
   end
 
 end
