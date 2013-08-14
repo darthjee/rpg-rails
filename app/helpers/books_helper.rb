@@ -8,4 +8,12 @@ module BooksHelper
         update_translation_book_path(params[:id],params[:lang])
       end
     end
+
+    def back_form_path
+      if params.has_key?(:id)
+        book_path(params[:id])
+      else
+        books_path
+      end
+    end
 end
