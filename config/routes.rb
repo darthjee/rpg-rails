@@ -11,6 +11,19 @@ RpgRails::Application.routes.draw do
     collection do
     end
   end
+  
+  resources :skills, :except => [:edit, :update] do
+    member do
+      get "/:lang/edit", :action => "edit", :as => "edit_translation"
+      post "/", :action => "create", :as => "create_translation"
+      put "/:lang", :action => "update", :as => "update_translation"
+      get "/new", :action => "new", :as => "new_translation"
+      delete "/:lang", :action => "destroy_translation", :as => "destroy_translation"
+
+    end
+    collection do
+    end
+  end
 
 
   # The priority is based upon order of creation:
