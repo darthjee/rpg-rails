@@ -1,6 +1,6 @@
 default: &default
   adapter: mongodb
-  database: rpg-<%= ENV['BUILD_SUFIX'] %>
+  database: rpg-development
   host: localhost
   port: 27017
 
