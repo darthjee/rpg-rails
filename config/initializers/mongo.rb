@@ -15,6 +15,8 @@ else
   YAML.load(File.read(File.expand_path('../../config/mongo.yml', File.dirname(__FILE__))))["#{Rails.env}"]
 end
 
+Rails.logger.info "using #{settings}"
+
 MongoMapper.connection = Mongo::Connection.new(settings['host'], settings['port'])
 MongoMapper.database = settings['database']
 
