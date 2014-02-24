@@ -9,7 +9,7 @@ settings = if ENV.has_key? 'MONGOHQ_URL'
     'pass' => MONGOHQ_URL.gsub(%r{^mongodb://[^:]*:([^@]*).*$},"\\1"),
     'host' => MONGOHQ_URL.gsub(%r{^mongodb://[^@]*@([^:]*):.*$},"\\1"),
     'port' => MONGOHQ_URL.gsub(%r{^mongodb://.*@[^:]*:([^/]*).*$},"\\1"),
-    'database' => MONGOHQ_URL.gsub(%r{^mongodb://.*@[^:]*:([^/]*).*$},"\\1")
+    'database' => MONGOHQ_URL.gsub(%r{^mongodb://.*@[^:]*:[^/]*\/(.*)$},"\\1")
   }
 else
   YAML.load(File.read(File.expand_path('../../config/mongo.yml', File.dirname(__FILE__))))["#{Rails.env}"]
