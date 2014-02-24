@@ -1,0 +1,33 @@
+<%= form_for(@translation,{:url => form_path}) do |f| %>
+  <% if @translation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@translation.errors.count, "error") %> prohibited this skill from being saved:</h2>
+
+      <ul>
+      <% @translation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table>
+      <tr>
+          <th><%= f.label :title %></th>
+          <td><%= f.text_field :title %></td>
+      </tr>
+      <tr>
+          <th><%= f.label :language %></th>
+          <td><%= f.text_field :language %></td>
+      </tr>
+      <tr>
+          <th><%= f.label :short %></th>
+          <td><%= f.text_field :short %></td>
+      </tr>
+  </table>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
